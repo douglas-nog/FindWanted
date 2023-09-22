@@ -1,4 +1,4 @@
-package br.com.fiap.findwanted.service;
+package br.com.fiap.findwanted.controller;
 
 import java.io.IOException;
 import java.net.URI;
