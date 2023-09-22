@@ -6,25 +6,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.LinkedHashMap;
+import java.util.List;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Notice {
 
-    private LinkedHashMap date_of_birth;
-    private LinkedHashMap nationalities;
-    private LinkedHashMap entity_id;
-    private LinkedHashMap forename;
-    private LinkedHashMap name;
-    private LinkedHashMap _links;
-
+    private String date_of_birth;
+    private List<String> nationalities;
+    private String entity_id;
+    private String forename;
+    private String name;
+    private Links _links;
 }
-/* forma que esta funcionando
-    private HashMap date_of_birth;
-    private LinkedHashMap nationalities;
-    private HashMap entity_id;
-    private HashMap forename;
-    private HashMap name;
-    private LinkedHashMap _links;*/
-

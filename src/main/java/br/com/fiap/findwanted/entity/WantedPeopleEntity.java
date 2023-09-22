@@ -1,24 +1,26 @@
 package br.com.fiap.findwanted.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "tbl_wanted_people_quarkus")
+@Table(name = "tbl_wanted_people")
+@Data
 public class WantedPeopleEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "name", length = 160)
     private String name;
+    @Column(length = 160)
     private String forename;
+    @Column(length = 10)
     private String dateOfBirth;
     private String thumbnail;
+
 }
