@@ -22,5 +22,7 @@ public class WantedPeopleEntity {
     @Column(length = 10)
     private String dateOfBirth;
     private String thumbnail;
+    @Column(length = 9)
+    private String governmetnalOrganization;
 
 }

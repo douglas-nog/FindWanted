@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface InterpolRepository extends JpaRepository<WantedPeopleEntity, Long> {
+public interface WantedRepository extends JpaRepository<WantedPeopleEntity, Long> {
 
     Optional<WantedPeopleEntity> findByName(String name);
 }

@@ -1,14 +1,14 @@
-package br.com.fiap.findwanted.model;
+package br.com.fiap.findwanted.model.interpol;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Query {
-    private int page;
-    private int resultPerPage;
-
+public class InterpolEmbedded {
+    private List<InterpolNotice> notices;
 }

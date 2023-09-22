@@ -1,4 +1,4 @@
-package br.com.fiap.findwanted.model;
+package br.com.fiap.findwanted.model.interpol;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
@@ -13,12 +13,12 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Notice {
+public class InterpolNotice {
 
     private String date_of_birth;
     private List<String> nationalities;
     private String entity_id;
     private String forename;
     private String name;
-    private Links _links;
+    private InterpolLinks _links;
 }
