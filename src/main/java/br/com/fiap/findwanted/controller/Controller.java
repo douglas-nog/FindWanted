@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -23,7 +24,7 @@ public class Controller {
 
     @GetMapping("iswanted")
     public ResponseEntity<String> getInterpolData(@RequestParam("name") String name) {
-        String encodedName = URLEncoder.encode(name, StandardCharsets.UTF_8).toLowerCase();
+        String encodedName = name.replace(" ", "%20").toLowerCase();
 
         Converter converter = new Converter();
         var consumeAPI = new ConsumeAPI();
@@ -31,8 +32,9 @@ public class Controller {
         var jsonFbi = consumeAPI.getData("https://api.fbi.gov/wanted/v1/list?title=" + encodedName);
         InterpolWantedList apiResponseInterpol = converter.getData(jsonInterpol, InterpolWantedList.class);
         FBIWantedList apiResponseFbi = converter.getData(jsonFbi, FBIWantedList.class);
-        Optional<WantedPeopleEntity> wantedPeopleEntityOptional = repository.findByName(name);
+        Optional<WantedPeopleEntity> wantedPeopleEntityOptional = repository.findByName(name.toLowerCase());
 
+        List<String> fbiNames = apiResponseFbi.getItems().stream().map(item -> item.getTitle().toLowerCase()).toList();
 
         if (!wantedPeopleEntityOptional.isEmpty()) {
             WantedPeopleEntity wantedPeopleEntity = wantedPeopleEntityOptional.get();
@@ -40,7 +42,7 @@ public class Controller {
                     "\nTo see the photo visit: " + wantedPeopleEntity.getThumbnail());
         } else if (apiResponseInterpol.getTotal() > 0) {
             WantedPeopleEntity wantedPeopleEntity = new WantedPeopleEntity();
-            wantedPeopleEntity.setId(null);
+            //wantedPeopleEntity.setId(null);
             wantedPeopleEntity.setName(apiResponseInterpol.get_embedded().getNotices().get(0).getName().toLowerCase());
             wantedPeopleEntity.setForename(apiResponseInterpol.get_embedded().getNotices().get(0).getForename().toLowerCase());
             wantedPeopleEntity.setThumbnail(apiResponseInterpol.get_embedded().getNotices().get(0).get_links().getThumbnail().getHref());
@@ -50,10 +52,10 @@ public class Controller {
 
             return ResponseEntity.ok("found in the Interpol database " + name + ". To see the photo visit: " +
                     apiResponseInterpol.get_embedded().getNotices().get(0).get_links().getThumbnail().getHref());
-        } else if (apiResponseFbi.getItems().get(0).getTitle().equals(name)) {
+        } else if (fbiNames.contains(name.toLowerCase())) {
 
             WantedPeopleEntity wantedPeopleEntity = new WantedPeopleEntity();
-            wantedPeopleEntity.setId(null);
+            //wantedPeopleEntity.setId(null);
             wantedPeopleEntity.setName(apiResponseFbi.getItems().get(0).getTitle().toLowerCase());
             wantedPeopleEntity.setForename(apiResponseFbi.getItems().get(0).getAliases().get(0).toLowerCase());
             wantedPeopleEntity.setThumbnail(apiResponseFbi.getItems().get(0).getImages().get(0).getOriginal());
