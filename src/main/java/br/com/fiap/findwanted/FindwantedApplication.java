@@ -5,16 +5,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class FindwantedApplication implements CommandLineRunner {
+public class FindwantedApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(FindwantedApplication.class, args);
     }
 
-    @Override
-    public void run(String... args) throws Exception {
-
-    }
 }
 
 
