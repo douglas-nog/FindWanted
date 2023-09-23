@@ -52,6 +52,7 @@ public class Controller {
             }
 
             return ResponseEntity.notFound().build();
+
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Ocorreu um erro inesperado. Por favor, tente novamente mais tarde." + e.getMessage());
