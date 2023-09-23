@@ -17,7 +17,6 @@ public class WantedService {
     @Autowired
     private WantedRepository repository;
 
-
     private Converter converter = new Converter();
     private ConsumeAPI consumeAPI = new ConsumeAPI();
 
