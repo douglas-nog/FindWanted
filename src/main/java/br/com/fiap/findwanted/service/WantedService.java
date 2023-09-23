@@ -1,11 +1,10 @@
 package br.com.fiap.findwanted.service;
 
 import br.com.fiap.findwanted.controller.ConsumeAPI;
-import br.com.fiap.findwanted.entity.WantedPeopleEntity;
+import br.com.fiap.findwanted.model.WantedPeopleEntity;
 import br.com.fiap.findwanted.model.fbi.FBIWantedList;
 import br.com.fiap.findwanted.model.interpol.InterpolWantedList;
 import br.com.fiap.findwanted.repository.WantedRepository;
-import br.com.fiap.findwanted.util.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

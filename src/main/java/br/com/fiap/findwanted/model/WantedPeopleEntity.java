@@ -1,4 +1,4 @@
-package br.com.fiap.findwanted.entity;
+package br.com.fiap.findwanted.model;
 
 import jakarta.persistence.*;
 import lombok.*;

@@ -1,4 +1,4 @@
-package br.com.fiap.findwanted.util;
+package br.com.fiap.findwanted.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

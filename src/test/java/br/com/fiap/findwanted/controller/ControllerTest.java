@@ -1,6 +1,6 @@
 package br.com.fiap.findwanted.controller;
 
-import br.com.fiap.findwanted.entity.WantedPeopleEntity;
+import br.com.fiap.findwanted.model.WantedPeopleEntity;
 import br.com.fiap.findwanted.model.fbi.FBIWantedList;
 import br.com.fiap.findwanted.model.fbi.FBIWantedPerson;
 import br.com.fiap.findwanted.model.fbi.FBIWantedPersonImage;
