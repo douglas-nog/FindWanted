@@ -24,5 +24,7 @@ public class WantedPeopleEntity {
     private String thumbnail;
     @Column(length = 9)
     private String governmetnalOrganization;
+    @Column(length = 36)
+    private String idFromSource;
 
 }
