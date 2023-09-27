@@ -1,14 +1,17 @@
-package br.com.fiap.findwanted.service;
+package br.com.fiap.findwanted.services;
 
 import br.com.fiap.findwanted.controller.ConsumeAPI;
-import br.com.fiap.findwanted.model.WantedPeopleEntity;
-import br.com.fiap.findwanted.model.fbi.FBIWantedList;
-import br.com.fiap.findwanted.model.interpol.InterpolWantedList;
+import br.com.fiap.findwanted.entities.WantedPeopleEntity;
+import br.com.fiap.findwanted.entities.fbi.FBIWantedList;
+import br.com.fiap.findwanted.entities.interpol.InterpolWantedList;
 import br.com.fiap.findwanted.repository.WantedRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,12 +23,26 @@ public class WantedService {
     private Converter converter = new Converter();
     private ConsumeAPI consumeAPI = new ConsumeAPI();
 
+    DateTimeFormatter formatoEntrada = DateTimeFormatter.ofPattern("MMMM d, yyyy", Locale.ENGLISH);
+    DateTimeFormatter formatoSaida = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+
+
     public void createWantedEntityFromFbi(FBIWantedList apiResponseFbi) {
         WantedPeopleEntity wantedPeopleEntity = new WantedPeopleEntity();
         wantedPeopleEntity.setName(apiResponseFbi.getItems().get(0).getTitle().toLowerCase());
-        wantedPeopleEntity.setForename(apiResponseFbi.getItems().get(0).getAliases().get(0).toLowerCase());
+        if (apiResponseFbi.getItems().get(0).getAliases() != null) {
+            wantedPeopleEntity.setForename(apiResponseFbi.getItems().get(0).getAliases().get(0).toLowerCase());
+        } else {
+            wantedPeopleEntity.setForename(null);
+        }
         wantedPeopleEntity.setThumbnail(apiResponseFbi.getItems().get(0).getImages().get(0).getOriginal());
-        wantedPeopleEntity.setDateOfBirth(apiResponseFbi.getItems().get(0).getDates_of_birth_used().get(0));
+        if (apiResponseFbi.getItems().get(0).getDates_of_birth_used() != null) {
+            LocalDate localDate = LocalDate.parse(apiResponseFbi.getItems().get(0).getDates_of_birth_used().get(0), formatoEntrada);
+            String dataformata = localDate.format(formatoSaida);
+            wantedPeopleEntity.setDateOfBirth(LocalDate.parse(dataformata,formatoSaida));
+        } else {
+            wantedPeopleEntity.setDateOfBirth(null);
+        }
         wantedPeopleEntity.setGovernmetnalOrganization("FBI");
         wantedPeopleEntity.setIdFromSource(apiResponseFbi.getItems().get(0).getUid());
         repository.save(wantedPeopleEntity);
@@ -36,7 +53,7 @@ public class WantedService {
         wantedPeopleEntity.setName(apiResponseInterpol.get_embedded().getNotices().get(0).getName().toLowerCase());
         wantedPeopleEntity.setForename(apiResponseInterpol.get_embedded().getNotices().get(0).getForename().toLowerCase());
         wantedPeopleEntity.setThumbnail(apiResponseInterpol.get_embedded().getNotices().get(0).get_links().getThumbnail().getHref());
-        wantedPeopleEntity.setDateOfBirth(apiResponseInterpol.get_embedded().getNotices().get(0).getDate_of_birth());
+        wantedPeopleEntity.setDateOfBirth(LocalDate.parse(apiResponseInterpol.get_embedded().getNotices().get(0).getDate_of_birth(), formatoSaida));
         wantedPeopleEntity.setGovernmetnalOrganization("Interpol");
         wantedPeopleEntity.setIdFromSource(apiResponseInterpol.get_embedded().getNotices().get(0).getEntity_id());
         repository.save(wantedPeopleEntity);
@@ -55,9 +72,13 @@ public class WantedService {
     }
 
     public boolean isInFbiList(FBIWantedList apiResponse, String name) {
-        apiResponse.getItems().stream().map(i -> i.getTitle().toLowerCase())
-                .collect(Collectors.toList()).contains(name.toLowerCase());
-        return true;
+        if (apiResponse.getItems().stream().map(i -> i.getTitle().toLowerCase())
+                .collect(Collectors.toList()).contains(name.toLowerCase())) {
+            return true;
+
+        } else {
+            return false;
+        }
     }
 
     public static ResponseEntity<String> getStringResponseEntityInterpol(String name, InterpolWantedList apiResponseInterpol, String organization) {

@@ -1,10 +1,10 @@
 package br.com.fiap.findwanted.controller;
 
-import br.com.fiap.findwanted.model.WantedPeopleEntity;
-import br.com.fiap.findwanted.model.fbi.FBIWantedList;
-import br.com.fiap.findwanted.model.interpol.InterpolWantedList;
+import br.com.fiap.findwanted.entities.WantedPeopleEntity;
+import br.com.fiap.findwanted.entities.fbi.FBIWantedList;
+import br.com.fiap.findwanted.entities.interpol.InterpolWantedList;
 import br.com.fiap.findwanted.repository.WantedRepository;
-import br.com.fiap.findwanted.service.WantedService;
+import br.com.fiap.findwanted.services.WantedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
-import static br.com.fiap.findwanted.service.WantedService.*;
+import static br.com.fiap.findwanted.services.WantedService.*;
 
 @RestController
 public class Controller {

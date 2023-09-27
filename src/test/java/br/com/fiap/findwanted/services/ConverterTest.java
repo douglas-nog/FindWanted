@@ -1,7 +1,7 @@
-package br.com.fiap.findwanted.service;
+package br.com.fiap.findwanted.services;
 
-import br.com.fiap.findwanted.model.fbi.FBIWantedPersonFile;
-import br.com.fiap.findwanted.model.interpol.InterpolNotice;
+import br.com.fiap.findwanted.entities.fbi.FBIWantedPersonFile;
+import br.com.fiap.findwanted.entities.interpol.InterpolNotice;
 import org.junit.jupiter.api.Test;
 
 public class ConverterTest {

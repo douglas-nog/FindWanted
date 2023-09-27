@@ -1,7 +1,9 @@
-package br.com.fiap.findwanted.model;
+package br.com.fiap.findwanted.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -20,7 +22,7 @@ public class WantedPeopleEntity {
     @Column(length = 160)
     private String forename;
     @Column(length = 30)
-    private String dateOfBirth;
+    private LocalDate dateOfBirth;
     private String thumbnail;
     @Column(length = 9)
     private String governmetnalOrganization;

@@ -1,4 +1,4 @@
-package br.com.fiap.findwanted.model.interpol;
+package br.com.fiap.findwanted.entities.fbi;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
@@ -9,6 +9,9 @@ import java.util.List;
 @Getter
 @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class InterpolEmbedded {
-    private List<InterpolNotice> notices;
+public class FBIWantedList {
+
+    private Integer total;
+    private List<FBIWantedPerson> items;
+    private Integer page;
 }

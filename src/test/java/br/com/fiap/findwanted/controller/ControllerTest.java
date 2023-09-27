@@ -1,12 +1,12 @@
 package br.com.fiap.findwanted.controller;
 
-import br.com.fiap.findwanted.model.WantedPeopleEntity;
-import br.com.fiap.findwanted.model.fbi.FBIWantedList;
-import br.com.fiap.findwanted.model.fbi.FBIWantedPerson;
-import br.com.fiap.findwanted.model.fbi.FBIWantedPersonImage;
-import br.com.fiap.findwanted.model.interpol.*;
+import br.com.fiap.findwanted.entities.WantedPeopleEntity;
+import br.com.fiap.findwanted.entities.fbi.FBIWantedList;
+import br.com.fiap.findwanted.entities.fbi.FBIWantedPerson;
+import br.com.fiap.findwanted.entities.fbi.FBIWantedPersonImage;
+import br.com.fiap.findwanted.entities.interpol.*;
 import br.com.fiap.findwanted.repository.WantedRepository;
-import br.com.fiap.findwanted.service.WantedService;
+import br.com.fiap.findwanted.services.WantedService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

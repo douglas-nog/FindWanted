@@ -1,4 +1,4 @@
-package br.com.fiap.findwanted.service;
+package br.com.fiap.findwanted.services;
 
 public interface DataConverter {
 

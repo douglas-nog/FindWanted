@@ -1,4 +1,4 @@
-package br.com.fiap.findwanted.model.interpol;
+package br.com.fiap.findwanted.entities.interpol;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;

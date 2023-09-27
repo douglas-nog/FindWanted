@@ -1,4 +1,4 @@
-package br.com.fiap.findwanted.model.fbi;
+package br.com.fiap.findwanted.entities.fbi;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;

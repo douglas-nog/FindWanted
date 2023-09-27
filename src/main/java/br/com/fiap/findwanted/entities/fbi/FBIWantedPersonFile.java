@@ -1,4 +1,4 @@
-package br.com.fiap.findwanted.model.interpol;
+package br.com.fiap.findwanted.entities.fbi;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
@@ -7,8 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class InterpolQuery {
-    private int page;
-    private int resultPerPage;
-
+public class FBIWantedPersonFile {
+    private String name;
+    private String url;
 }
